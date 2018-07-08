@@ -1,0 +1,46 @@
+﻿@model TimesheetGenerator.ViewModel.TimeSheetViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Timesheet Generator</h2>
+
+@using (Html.BeginForm("SaveDate", "Home", FormMethod.Post))
+{
+
+    <div class="col-md-3">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div>
+            @Html.TextBoxFor(model => model.CandidateName, "", new { @class = "form-control", placeholder = "Candidate Name" })
+            @Html.ValidationMessageFor(model => model.CandidateName)
+        </div>
+        <p></p>
+        <div>
+            @Html.TextBoxFor(model => model.ClientName, "", new { @class = "form-control", placeholder = "Client Name" })
+            @Html.ValidationMessageFor(model => model.ClientName)
+        </div>
+        <p></p>
+        <div>
+            @Html.TextBoxFor(model => model.JobTitle, "", new { @class = "form-control", placeholder = "Job Title" })
+            @Html.ValidationMessageFor(model => model.JobTitle)
+        </div>
+        <p></p>
+        <div>
+            @Html.TextBoxFor(model => model.StartDate, "", new { @class = "form-control", placeholder = "Placement Start Date", value = "" })
+            @Html.ValidationMessageFor(model => model.StartDate)
+            @Html.TextBoxFor(model => model.EndDate, "", new { @class = "form-control", placeholder = "Placement End Date", value = "" })
+            @Html.ValidationMessageFor(model => model.EndDate)
+        </div>
+        <p></p>
+        <div>
+            @Html.DropDownListFor(model => Model.SheetType, new List<SelectListItem> { new SelectListItem { Text = "Monthly", Value = "1" }, new SelectListItem { Text = "Weekly", Value = "2" } }, "Placement Type")
+            @Html.ValidationMessageFor(model => model.SheetType)
+        </div>
+        <p></p>
+        <input type="submit" value="Generate Timesheets" class="btn btn-default" />
+    </div>
+
+}
